@@ -1,0 +1,17 @@
+server {
+  listen 8080 default_server;
+
+  root /src/jclement_ca/_site;
+  index index.html;
+  server_name localhost;
+
+  location / {
+    try_files $uri $uri/ =404;
+  }
+
+  error_page 404 /error.html;
+
+  location ~ /\.git {
+    deny all;
+  }
+}
