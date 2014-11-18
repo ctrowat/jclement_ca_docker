@@ -1,5 +1,5 @@
 FROM jclement/baseimage
-MAINTAINER jeffrey.clement@gmail.com
+MAINTAINER ctrowat@gmail.com
 EXPOSE 80 22
 
 ENV HOME /root
@@ -26,12 +26,12 @@ RUN mkdir -p /src
 RUN useradd -ms /bin/bash site-owner
 RUN chown site-owner.site-owner /src
 USER site-owner
-RUN cd /src && git clone https://github.com/jclement/jclement_ca.git 
-RUN cd /src/jclement_ca && /usr/local/bin/jekyll build
+RUN cd /src && git clone https://github.com/ctrowat/jekyll.git 
+RUN cd /src/site && /usr/local/bin/jekyll build
 USER root
 
 # setup website refresh crontab 
-RUN echo "*/20 * * * * cd /src/jclement_ca && git pull && /usr/local/bin/jekyll build" > /tmp/crontab
+RUN echo "*/20 * * * * cd /src/site && git pull && /usr/local/bin/jekyll build" > /tmp/crontab
 RUN crontab -u site-owner /tmp/crontab
 RUN rm /tmp/crontab
 
