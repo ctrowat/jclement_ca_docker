@@ -26,7 +26,7 @@ RUN mkdir -p /src
 RUN useradd -ms /bin/bash site-owner
 RUN chown site-owner.site-owner /src
 USER site-owner
-RUN cd /src && git clone https://github.com/ctrowat/jekyll.git 
+RUN cd /src && git clone https://github.com/ctrowat/jekyll.git site
 RUN cd /src/site && /usr/local/bin/jekyll build
 USER root
 
